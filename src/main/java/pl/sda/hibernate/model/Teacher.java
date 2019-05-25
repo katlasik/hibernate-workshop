@@ -5,15 +5,13 @@ import java.util.Set;
 import java.util.StringJoiner;
 import javax.persistence.*;
 
-@Entity
 public class Teacher {
 
-  @Id @GeneratedValue private Long id;
+  private Long id;
 
   private String firstName;
   private String lastName;
 
-  @OneToMany(mappedBy = "teacher")
   private Set<SchoolClass> schoolClasses;
 
   public Teacher() {}

@@ -6,10 +6,9 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import javax.persistence.*;
 
-@Entity
 public class Student {
 
-  @Id @GeneratedValue private Long id;
+  private Long id;
 
   private String firstName;
 
@@ -17,11 +16,6 @@ public class Student {
 
   private LocalDate birthdate;
 
-  @ManyToMany
-  @JoinTable(
-      name = "SchoolClassStudent",
-      joinColumns = {@JoinColumn(name = "student_id")},
-      inverseJoinColumns = {@JoinColumn(name = "schoolClass_id")})
   private List<SchoolClass> schoolClasses;
 
   public Student() {}

@@ -6,8 +6,6 @@ import java.util.StringJoiner;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
-@DiscriminatorValue("written")
 public class WrittenTest extends Test {
 
   private Long duration;

@@ -6,8 +6,6 @@ import java.util.StringJoiner;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
-@DiscriminatorValue("verbal")
 public class VerbalTest extends Test {
 
   private Boolean isPresentation;

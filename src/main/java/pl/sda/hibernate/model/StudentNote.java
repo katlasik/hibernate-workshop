@@ -7,22 +7,19 @@ import javax.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Immutable;
 
-@Entity
-@Immutable
 public class StudentNote {
 
-  @Id @GeneratedValue Long id;
+  Long id;
 
   private Integer value;
 
-  @ColumnDefault("1")
   private Integer weight;
 
   private LocalDate createdAt;
 
-  @ManyToOne private SchoolClass schoolClass;
+  private SchoolClass schoolClass;
 
-  @ManyToOne private Student student;
+  private Student student;
 
   public StudentNote(Integer value, Integer weight, SchoolClass schoolClass, Student student) {
     this.value = Objects.requireNonNull(value);

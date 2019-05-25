@@ -5,19 +5,16 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import javax.persistence.*;
 
-@Entity
 public class SchoolClass {
 
-  @Id @GeneratedValue private Long id;
+  private Long id;
 
   private String name;
 
-  @ManyToOne private Teacher teacher;
+  private Teacher teacher;
 
-  @ManyToMany(mappedBy = "schoolClasses")
   private List<Student> students;
 
-  @OneToMany(mappedBy = "schoolClass")
   private List<Test> tests;
 
   public SchoolClass() {}
