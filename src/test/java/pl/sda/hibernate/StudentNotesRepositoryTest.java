@@ -38,7 +38,7 @@ public class StudentNotesRepositoryTest {
   }
 
   @Test
-  @DisplayName("Should return right averege for school classl.")
+  @DisplayName("Should return right average for school classl.")
   void testGetAverageBySchoolClass() {
     Double average = studentNotesRepository.getAverageBySchoolClass(1L);
 
@@ -59,6 +59,7 @@ public class StudentNotesRepositoryTest {
   @Test
   @DisplayName("Student note should be created with createdAt date.")
   void testCreateStudentNote() {
+    entityManager.getTransaction().begin();
     StudentNote sn =
         new StudentNote(
             5,
@@ -66,6 +67,7 @@ public class StudentNotesRepositoryTest {
             entityManager.getReference(SchoolClass.class, 1L),
             entityManager.getReference(Student.class, 1L));
     entityManager.persist(sn);
+    entityManager.getTransaction().commit();
     assertThat(entityManager.find(StudentNote.class, sn.getId()).getCreatedAt()).isNotNull();
   }
 }

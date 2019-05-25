@@ -1,6 +1,7 @@
 package pl.sda.hibernate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collections;
 import javax.persistence.EntityManager;
@@ -46,13 +47,27 @@ public class TeachersRepositoryTest {
   @Test
   @DisplayName("Teacher should be able to be assigned to class.")
   void testAssignToSchoolClass() {
-
+    entityManager.getTransaction().begin();
     Teacher teacher = entityManager.find(Teacher.class, 1L);
     SchoolClass schoolClass = entityManager.find(SchoolClass.class, 2L);
 
     teacher.assignToSchoolClass(schoolClass);
+    entityManager.getTransaction().commit();
 
     assertThat(entityManager.find(Teacher.class, 1L).getSchoolClasses()).contains(schoolClass);
     assertThat(entityManager.find(SchoolClass.class, 2L).getTeacher()).isEqualTo(teacher);
+  }
+
+  @Test
+  @DisplayName("Should prevent removing teacher.")
+  void testPreRemove() {
+    entityManager.getTransaction().begin();
+    Teacher teacher = entityManager.find(Teacher.class, 1L);
+
+    assertThrows(IllegalStateException.class, () -> entityManager.remove(teacher));
+
+    teacher.getSchoolClasses().clear();
+    entityManager.remove(teacher);
+    entityManager.getTransaction().commit();
   }
 }

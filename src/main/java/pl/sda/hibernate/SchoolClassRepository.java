@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import pl.sda.hibernate.model.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class SchoolClassRepository {
 
@@ -18,11 +17,11 @@ public class SchoolClassRepository {
     return entityManager.find(SchoolClass.class, id).getTests();
   }
 
-  public List<VerbalTest> getAllVerbalTests(long id) {
+  public List<VerbalTest> getAllVerbalTestsBySchoolClassId(long id) {
    throw new UnsupportedOperationException("Not yet implemented");
   }
 
-  public List<WrittenTest> getAllWrittenTests(long id) {
+  public <T extends Test> List<T> getTestsByType(Class<T> type) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 }
