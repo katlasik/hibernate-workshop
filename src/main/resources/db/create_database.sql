@@ -9,8 +9,6 @@ FLUSH PRIVILEGES;
 
 USE school;
 
-drop table if exists hibernate_sequence;
-
 drop table if exists SchoolClass;
 
 drop table if exists SchoolClassStudent;
@@ -23,29 +21,9 @@ drop table if exists Teacher;
 
 drop table if exists Test;
 
-create table hibernate_sequence
-(
-    next_val bigint
-);
-
-insert into hibernate_sequence
-values (1);
-
-insert into hibernate_sequence
-values (1);
-
-insert into hibernate_sequence
-values (1);
-
-insert into hibernate_sequence
-values (1);
-
-insert into hibernate_sequence
-values (1);
-
 create table SchoolClass
 (
-    id         bigint not null,
+    id         bigint not null AUTO_INCREMENT,
     name       varchar(255),
     teacher_id bigint,
     primary key (id)
@@ -59,7 +37,7 @@ create table SchoolClassStudent
 
 create table Student
 (
-    id        bigint not null,
+    id        bigint not null AUTO_INCREMENT,
     birthdate date,
     firstName varchar(255),
     lastName  varchar(255),
@@ -68,7 +46,7 @@ create table Student
 
 create table StudentNote
 (
-    id             bigint not null,
+    id             bigint not null AUTO_INCREMENT,
     createdAt      date,
     value          integer,
     weight         integer default 1,
@@ -77,18 +55,10 @@ create table StudentNote
     primary key (id)
 );
 
-create table Teacher
-(
-    id        bigint not null,
-    firstName varchar(255),
-    lastName  varchar(255),
-    primary key (id)
-);
-
 create table Test
 (
+    id             bigint      not null AUTO_INCREMENT,
     type           varchar(31) not null,
-    id             bigint      not null,
     date           date,
     subject        varchar(255),
     isPresentation bit,
@@ -97,32 +67,50 @@ create table Test
     primary key (id)
 );
 
+create table Teacher
+(
+    id        bigint not null AUTO_INCREMENT,
+    firstName varchar(255),
+    lastName  varchar(255),
+    primary key (id)
+);
+
+create table SchoolClass_lessonTopics (
+    SchoolClass_id bigint not null,
+    lessonTopics varchar(255)
+);
+
 alter table SchoolClass
-    add constraint FK3h2qnhgmn5qgqwf32ud1r0729
+    add constraint SchoolClass_Teacher_fk
         foreign key (teacher_id)
             references Teacher (id);
 
 alter table SchoolClassStudent
-    add constraint FKqxx8oju4b81qmn29x6ii08jos
+    add constraint SchoolClassStudent_SchoolClass_fk
         foreign key (schoolClass_id)
             references SchoolClass (id);
 
 alter table SchoolClassStudent
-    add constraint FK61gclkck6ai5h358o0htxgigl
+    add constraint SchoolClassStudent_Student_fk
         foreign key (student_id)
             references Student (id);
 
 alter table StudentNote
-    add constraint FKlwfjcwlx8pjujgsinxsylotq4
+    add constraint StudentNote_SchoolClass_fk
         foreign key (schoolClass_id)
             references SchoolClass (id);
 
 alter table StudentNote
-    add constraint FKg0jeamfibv1x2nfx89yv0y7to
+    add constraint StudentNote_Student_fk
         foreign key (student_id)
             references Student (id);
 
 alter table Test
-    add constraint FK8at9linrrt5j6e80m64957x3h
+    add constraint Test_SchoolClass_fk
         foreign key (schoolClass_id)
             references SchoolClass (id);
+
+alter table SchoolClass_lessonTopics
+    add constraint SchoolClass_lessonTopics_fk
+        foreign key (SchoolClass_id)
+            references SchoolClass (id)

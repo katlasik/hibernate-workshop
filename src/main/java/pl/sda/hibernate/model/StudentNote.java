@@ -11,7 +11,9 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 public class StudentNote {
 
-  @Id @GeneratedValue Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Long id;
 
   private Integer value;
 
@@ -59,7 +61,7 @@ public class StudentNote {
 
   @PrePersist
   void prePersist() {
-    createdAt = LocalDate.now();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   @Override

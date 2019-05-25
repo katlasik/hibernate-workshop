@@ -8,7 +8,9 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "type")
 public class Test {
 
-  @Id @GeneratedValue protected Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  protected Long id;
 
   protected String subject;
   protected LocalDate date;

@@ -8,7 +8,9 @@ import javax.persistence.*;
 @Entity
 public class Teacher {
 
-  @Id @GeneratedValue private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   private String firstName;
   private String lastName;
@@ -36,8 +38,16 @@ public class Teacher {
     return firstName;
   }
 
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
   public String getLastName() {
     return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public Set<SchoolClass> getSchoolClasses() {
@@ -45,8 +55,12 @@ public class Teacher {
   }
 
   public void assignToSchoolClass(SchoolClass schoolClass) {
-    schoolClasses.add(schoolClass);
-    schoolClass.setTeacher(this);
+    throw new UnsupportedOperationException("Not yet implemented");
+  }
+
+  @PreRemove
+  void preRemove() {
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   @Override

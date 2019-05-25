@@ -14,28 +14,14 @@ public class SchoolClassRepository {
   }
 
   public List<Test> getAllTestsBySchoolClassId(long id) {
-    return entityManager.find(SchoolClass.class, id).getTests();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
-  public List<VerbalTest> getAllVerbalTests(long id) {
-    return entityManager
-        .createQuery(
-            "select t from SchoolClass sc join sc.tests t where t.class = VerbalTest and sc.id = :id",
-            Test.class)
-        .setParameter("id", id)
-        .getResultStream()
-        .map(s -> (VerbalTest) s)
-        .collect(Collectors.toList());
-  }
+   public List<VerbalTest> getAllVerbalTestsBySchoolClassId(long id) {
+     throw new UnsupportedOperationException("Not yet implemented");
+   }
 
-  public List<WrittenTest> getAllWrittenTests(long id) {
-    return entityManager
-        .createQuery(
-            "select t from SchoolClass sc join sc.tests t where type(t) = WrittenTest and sc.id = :id",
-            Test.class)
-        .setParameter("id", id)
-        .getResultStream()
-        .map(s -> (WrittenTest) s)
-        .collect(Collectors.toList());
+  public <T extends Test> List<T> getTestsByType(Class<T> type) {
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 }

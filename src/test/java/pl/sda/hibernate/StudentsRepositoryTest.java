@@ -88,7 +88,17 @@ public class StudentsRepositoryTest {
         studentsRepository.createStudent(
             new Student(null, "Henryk", "Nowakowski", LocalDate.parse("2000-02-03")));
     Optional<Student> persisted = studentsRepository.findStudentById(result.getId());
+
+    String firstName =
+        new JdbcTemplate(db.getDatasource())
+            .queryForObject(
+                "SELECT firstName FROM Student WHERE id = ?",
+                String.class,
+                persisted.get().getId());
+
     assertThat(persisted).contains(result);
+
+    assertThat(persisted.map(Student::getFirstName)).contains(firstName);
   }
 
   @Test
@@ -108,9 +118,15 @@ public class StudentsRepositoryTest {
     Student student = new Student(4L, "Szymon", "Urbanski", LocalDate.parse("2000-11-11"));
 
     studentsRepository.updateStudent(student);
+
+    String firstName =
+        new JdbcTemplate(db.getDatasource())
+            .queryForObject("SELECT firstName FROM Student WHERE id = 4", String.class);
+
     Optional<Student> persisted = studentsRepository.findStudentById(4L);
 
     assertThat(persisted).contains(student);
+    assertThat(firstName).isEqualTo(student.getFirstName());
   }
 
   @Test
@@ -118,11 +134,19 @@ public class StudentsRepositoryTest {
   void testDeleteStudent() {
     Student student = studentsRepository.findStudentById(4L).get();
     studentsRepository.deleteStudent(student);
+
+    int count =
+        new JdbcTemplate(db.getDatasource())
+            .queryForList("SELECT * FROM Student WHERE id = 4")
+            .size();
+
     assertThat(studentsRepository.findStudentById(4L)).isEmpty();
+
+    assertThat(count).isEqualTo(0);
   }
 
   @Test
-  @DisplayName("Student object should be updated")
+  @DisplayName("Student object should be refreshed")
   void testRefreshStudent() {
 
     Student student = studentsRepository.findStudentById(1L).get();
