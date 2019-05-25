@@ -45,8 +45,7 @@ public class Teacher {
   }
 
   public void assignToSchoolClass(SchoolClass schoolClass) {
-    schoolClasses.add(schoolClass);
-    schoolClass.setTeacher(this);
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   @Override

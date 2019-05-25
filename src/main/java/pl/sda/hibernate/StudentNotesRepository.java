@@ -14,28 +14,14 @@ public class StudentNotesRepository {
   }
 
   public List<StudentNote> getNotesByStudentId(long id) {
-    return entityManager
-        .createQuery(
-            "select sn from Student s JOIN StudentNote sn ON sn.student = s WHERE s.id = :id ",
-            StudentNote.class)
-        .setParameter("id", id)
-        .getResultList();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public List<NoteWithClassName> getNotesWithClassNameByStudentId(long id) {
-    return entityManager
-        .createQuery(
-            "select new pl.sda.hibernate.model.dto.NoteWithClassName(sn.value, sc.name) from StudentNote sn join SchoolClass sc on sn.schoolClass = sc where sn.student.id = :id ",
-            NoteWithClassName.class)
-        .setParameter("id", id)
-        .getResultList();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public Double getAverageBySchoolClass(long id) {
-    return entityManager
-        .createQuery(
-            "select avg(sn.value) from StudentNote sn where sn.schoolClass.id = :id", Double.class)
-        .setParameter("id", id)
-        .getSingleResult();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 }

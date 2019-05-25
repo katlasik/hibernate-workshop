@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import pl.sda.hibernate.model.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class SchoolClassRepository {
 
@@ -18,24 +19,10 @@ public class SchoolClassRepository {
   }
 
   public List<VerbalTest> getAllVerbalTests(long id) {
-    return entityManager
-        .createQuery(
-            "select t from SchoolClass sc join sc.tests t where t.class = VerbalTest and sc.id = :id",
-            Test.class)
-        .setParameter("id", id)
-        .getResultStream()
-        .map(s -> (VerbalTest) s)
-        .collect(Collectors.toList());
+   throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public List<WrittenTest> getAllWrittenTests(long id) {
-    return entityManager
-        .createQuery(
-            "select t from SchoolClass sc join sc.tests t where type(t) = WrittenTest and sc.id = :id",
-            Test.class)
-        .setParameter("id", id)
-        .getResultStream()
-        .map(s -> (WrittenTest) s)
-        .collect(Collectors.toList());
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 }

@@ -16,63 +16,49 @@ public class StudentsRepository {
   }
 
   public Optional<Student> findStudentById(Long id) {
-    return Optional.ofNullable(entityManager.find(Student.class, id));
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public Student findStudentByIdLazily(Long id) {
-    return entityManager.getReference(Student.class, id);
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public Student createStudent(Student student) {
-    entityManager.persist(student);
-    return student;
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public void updateStudent(Student student) {
-    entityManager.merge(student);
+    throw new UnsupportedOperationException("Not yet implemented");
+
   }
 
   public void deleteStudent(Student student) {
-    entityManager.remove(student);
+    throw new UnsupportedOperationException("Not yet implemented");
+
   }
 
   public void refreshStudent(Student student) {
-    entityManager.refresh(student);
+    throw new UnsupportedOperationException("Not yet implemented");
+
   }
 
   public List<Student> getStudents() {
-    return entityManager.createQuery("from Student", Student.class).getResultList();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public long getStudentsCount() {
-    return entityManager
-        .createQuery("select count(s) from Student s", Long.class)
-        .getSingleResult();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public List<Student> findStudentsByName(String name) {
-    TypedQuery<Student> query =
-        entityManager.createQuery(
-            "from Student s where lower(s.firstName) like lower(:name) or lower(s.lastName) like lower(:name)",
-            Student.class);
-    query.setParameter("name", name + "%");
-    return query.getResultList();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public List<SchoolClass> getClassesByStudentId(long id) {
-    TypedQuery<SchoolClass> query =
-        entityManager.createQuery(
-            "select sc from SchoolClass sc join sc.students s where s.id = :id", SchoolClass.class);
-    query.setParameter("id", id);
-    return query.getResultList();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public List<Student> getAllFriendStudentsByStudentId(long id) {
-    return entityManager
-        .createQuery(
-            "select distinct st from Student s join s.schoolClasses sc join sc.students st join fetch st.schoolClasses where s.id = :id",
-            Student.class)
-        .setParameter("id", id)
-        .getResultList();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 }

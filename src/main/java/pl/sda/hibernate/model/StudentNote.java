@@ -59,7 +59,7 @@ public class StudentNote {
 
   @PrePersist
   void prePersist() {
-    createdAt = LocalDate.now();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   @Override
