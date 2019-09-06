@@ -70,4 +70,10 @@ public class TeachersRepositoryTest {
     entityManager.remove(teacher);
     entityManager.getTransaction().commit();
   }
+
+  @Test
+  @DisplayName("Should prevent removing teacher.")
+  void testGetTeacherInitials() {
+    assertThat(teachersRepository.getTeacherInitials()).isEqualTo("D.L.,B.W.,A.W.");
+  }
 }

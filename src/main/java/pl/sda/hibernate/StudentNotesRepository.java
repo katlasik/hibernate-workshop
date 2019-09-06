@@ -13,6 +13,10 @@ public class StudentNotesRepository {
     this.entityManager = entityManager;
   }
 
+  public Double getAverageBySchoolClass(long id) {
+    throw new UnsupportedOperationException("Not yet implemented");
+  }
+
   public List<StudentNote> getNotesByStudentId(long id) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
@@ -21,7 +25,4 @@ public class StudentNotesRepository {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 
-  public Double getAverageBySchoolClass(long id) {
-    throw new UnsupportedOperationException("Not yet implemented");
-  }
 }
