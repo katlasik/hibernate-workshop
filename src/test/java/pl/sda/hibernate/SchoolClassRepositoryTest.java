@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.springframework.jdbc.core.JdbcTemplate;
+import pl.sda.hibernate.model.SchoolClass;
 import pl.sda.hibernate.model.VerbalTest;
 import pl.sda.hibernate.model.WrittenTest;
 import pl.sda.hibernate.utils.HibernateBootstraper;

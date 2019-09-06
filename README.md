@@ -27,9 +27,12 @@
    5. Zaimplementuj `getAllFriendStudentsByStudentId` w ten sposób, żeby można było mieć dostęp do pola `schoolClasses` studenta nawet po zaknięciu sesji.
    
 3. Zaimplementu metody w `StudentNoteRepository`:
-   1. Zaimplementuj metodę `getNotesByStudentId`.
-   2. Zaimplementuj metodę `getNotesWithClassNameByStudentId`, tak by zwracała listę `NoteWithClassName`.
-   3. Zaimplementuj metodę `prePersist` w `StudentNote`, tak by ustawiała pole `createdAt`.
+   1. Zaimplementuj metodę `getAverageBySchoolClass`.
+   2. Zaimplementuj metodę `getNotesByStudentId`.
+   3. Zaimplementuj metodę `getNotesWithClassNameByStudentId`, tak by zwracała listę `NoteWithClassName`.
+   4. Zaimplementuj metodę `prePersist` w `StudentNote`, tak by ustawiała pole `createdAt`.
+   5. Dodaj odpowiednią kaskadę do relacji ocen do uczniów, tak by przy usuwaniu rekordu ucznia były także
+      usuwane wszystkie oceny.
    
 4. Zaimplementuj metody w `TeachersRepository`. 
    1. W metodzie `getTeachersNameDetails` użyj `contat` z **JPQL**.
@@ -37,12 +40,15 @@
    3. Zaimplementuj metodę `assignToSchoolClass` w encji `Teacher` która pozwala na dodanie nauczyciela do przedmiotu.
    4. Zaimplementuj metodę `preRemove`, która sprawdza czy nauczyciel uczy jakiegokolwiek przedmiotu.
       Jeżeli tak, to zgłoś wyjątek `IllegalStateException`.
+   5. Zaimplementuj metodę `getTeachersInitials`, zwracającą inicjały nauczycieli jako pojedyńczy łańcuch znaków,
+      zawierający inicjały nauczycieli dzielone przecinkiem. Przykładowy wyniK: `D.L.,B.W.,A.W.`.
+      Użyj natywnego zapytania używającego funkcji `SUBSTRING`, `CONCAT` oraz `GROUP_CONCAT`.
    
 5. Zaimplementuj metody w `SchoolClassRepository`.
-  1. Zaimplementuj metodę `getAllTestsBySchoolClassId`, która zwraca wszystkie testy dla danego przedmiotu.
-  2. Zaimplementuj metodę `getAllVerbalTestsBySchoolClassId`, która zwraca wszystkie testy ustne dla danego przedmiotu.
-  3. Zaimplementuj metodę `getTestsByType`, która zwraca wszystkie testy danego podtypu.
-  4. Zaimplementuj metodę `addTopic` w encji `SchoolClass`, która będzie pozwała dodać temat do przedmiotu.
+   1. Zaimplementuj metodę `getAllTestsBySchoolClassId`, która zwraca wszystkie testy dla danego przedmiotu.
+   2. Zaimplementuj metodę `getAllVerbalTestsBySchoolClassId`, która zwraca wszystkie testy ustne dla danego przedmiotu.
+   3. Zaimplementuj metodę `getTestsByType`, która zwraca wszystkie testy danego podtypu.
+   4. Zaimplementuj metodę `addTopic` w encji `SchoolClass`, która będzie pozwała dodać temat do przedmiotu.
 
 6. Użyj `FullName` jako obiekt *embedded* zamiast `firstName` i `lastName` w `Teacher` i `Student`. 
 

@@ -1,7 +1,6 @@
 package pl.sda.hibernate;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import pl.sda.hibernate.model.*;
 
@@ -14,7 +13,7 @@ public class SchoolClassRepository {
   }
 
   public List<Test> getAllTestsBySchoolClassId(long id) {
-    return entityManager.find(SchoolClass.class, id).getTests();
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public List<VerbalTest> getAllVerbalTestsBySchoolClassId(long id) {

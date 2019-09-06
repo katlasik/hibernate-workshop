@@ -34,8 +34,16 @@ public class Teacher {
     return firstName;
   }
 
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
   public String getLastName() {
     return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public Set<SchoolClass> getSchoolClasses() {
@@ -43,6 +51,10 @@ public class Teacher {
   }
 
   public void assignToSchoolClass(SchoolClass schoolClass) {
+    throw new UnsupportedOperationException("Not yet implemented");
+  }
+
+  void preRemove() {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 

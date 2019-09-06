@@ -1,12 +1,12 @@
 package pl.sda.hibernate;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -85,16 +85,16 @@ public class StudentsRepositoryTest {
             new Student(null, "Henryk", "Nowakowski", LocalDate.parse("2000-02-03")));
     Optional<Student> persisted = studentsRepository.findStudentById(result.getId());
 
-    String firstName =
-        new JdbcTemplate(db.getDatasource())
-            .queryForObject(
-                "SELECT firstName FROM Student WHERE id = ?",
-                String.class,
-                persisted.get().getId());
+    Optional<String> firstName =
+        persisted.map(
+            p ->
+                new JdbcTemplate(db.getDatasource())
+                    .queryForObject(
+                        "SELECT firstName FROM Student WHERE id = ?", String.class, p.getId()));
 
     assertThat(persisted).contains(result);
 
-    assertThat(persisted.map(Student::getFirstName)).contains(firstName);
+    assertThat(persisted.map(Student::getFirstName)).isEqualTo(firstName);
   }
 
   @Test

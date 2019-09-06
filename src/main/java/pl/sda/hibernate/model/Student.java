@@ -3,6 +3,7 @@ package pl.sda.hibernate.model;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 import javax.persistence.*;
 
@@ -17,6 +18,8 @@ public class Student {
   private LocalDate birthdate;
 
   private List<SchoolClass> schoolClasses;
+
+  private Set<StudentNote> notes;
 
   public Student() {}
 
@@ -63,8 +66,8 @@ public class Student {
     this.birthdate = birthdate;
   }
 
-  public void setSchoolClasses(List<SchoolClass> schoolClasses) {
-    this.schoolClasses = schoolClasses;
+  public Set<StudentNote> getNotes() {
+    return notes;
   }
 
   @Override
