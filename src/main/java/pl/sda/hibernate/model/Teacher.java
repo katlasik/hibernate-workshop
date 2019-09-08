@@ -58,7 +58,6 @@ public class Teacher {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 
-  @PreRemove
   void preRemove() {
     throw new UnsupportedOperationException("Not yet implemented");
   }
