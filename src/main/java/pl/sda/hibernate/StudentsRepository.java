@@ -50,6 +50,10 @@ public class StudentsRepository {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 
+  public Optional<Student> getStudentByName(String name) {
+    throw new UnsupportedOperationException("Not yet implemented");
+  }
+
   public List<Student> findStudentsByName(String name) {
     throw new UnsupportedOperationException("Not yet implemented");
   }

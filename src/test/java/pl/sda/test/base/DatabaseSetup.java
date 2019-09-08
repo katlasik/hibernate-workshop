@@ -47,7 +47,7 @@ public class DatabaseSetup implements BeforeAllCallback, BeforeEachCallback {
   private DbSetup createDbSetup() {
     Operation operation =
         sequenceOf(
-            deleteAllFrom("SchoolClass_lessonTopics"),
+            deleteAllFrom("LessonTopics"),
             deleteAllFrom("StudentNote"),
             deleteAllFrom("Test"),
             deleteAllFrom("SchoolClassStudent"),
@@ -73,21 +73,22 @@ public class DatabaseSetup implements BeforeAllCallback, BeforeEachCallback {
                 .values(2L, 2L, "Fizyka")
                 .values(3L, 3L, "Chemia")
                 .build(),
-            insertInto("SchoolClass_lessonTopics")
-                    .columns("SchoolClass_id", "lessonTopics")
-                    .values(1L, "Ułamki")
-                    .values(1L, "Funkcja kwadratowa")
-                    .values(2L, "Optyka")
-                    .values(2L, "Mechanika")
-                    .values(3L, "Estry")
-                    .values(3L, "Kwasy")
-                    .build(),
+            insertInto("LessonTopics")
+                .columns("schoolClass_id", "topic")
+                .values(1L, "Ułamki")
+                .values(1L, "Funkcja kwadratowa")
+                .values(2L, "Optyka")
+                .values(2L, "Mechanika")
+                .values(3L, "Estry")
+                .values(3L, "Kwasy")
+                .build(),
             insertInto("SchoolClassStudent")
                 .columns("schoolClass_id", "student_id")
                 .values(1L, 1L)
                 .values(2L, 1L)
                 .values(2L, 2L)
                 .values(3L, 3L)
+                .values(2L, 3L)
                 .values(3L, 4L)
                 .build(),
             insertInto("Test")

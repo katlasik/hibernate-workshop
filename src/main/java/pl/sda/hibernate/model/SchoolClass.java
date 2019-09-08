@@ -22,8 +22,6 @@ public class SchoolClass {
   @OneToMany(mappedBy = "schoolClass")
   private List<Test> tests;
 
-  @ElementCollection private List<String> lessonTopics;
-
   public SchoolClass() {}
 
   public SchoolClass(Long id, String name) {
@@ -58,7 +56,7 @@ public class SchoolClass {
   }
 
   public List<String> getLessonTopics() {
-    return lessonTopics;
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public void addLessonTopic(String topic) {

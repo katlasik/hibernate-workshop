@@ -75,9 +75,9 @@ create table Teacher
     primary key (id)
 );
 
-create table SchoolClass_lessonTopics (
-    SchoolClass_id bigint not null,
-    lessonTopics varchar(255)
+create table LessonTopics (
+    schoolClass_id bigint not null,
+    topic varchar(255)
 );
 
 alter table SchoolClass
@@ -110,7 +110,7 @@ alter table Test
         foreign key (schoolClass_id)
             references SchoolClass (id);
 
-alter table SchoolClass_lessonTopics
-    add constraint SchoolClass_lessonTopics_fk
-        foreign key (SchoolClass_id)
+alter table LessonTopics
+    add constraint LessonTopics_fk
+        foreign key (schoolClass_id)
             references SchoolClass (id)
