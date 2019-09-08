@@ -28,7 +28,7 @@ public class TeachersRepositoryTest {
   @DisplayName("All name details should be returned")
   void testGetTeachersNameDetails() {
     assertThat(teachersRepository.getTeachersNames())
-            .containsExactlyInAnyOrder("Damian Lewandowski", "Beata Woźniak", "Artur Wójcik");
+        .containsExactlyInAnyOrder("Damian Lewandowski", "Beata Woźniak", "Artur Wójcik");
   }
 
   @Test
@@ -36,12 +36,12 @@ public class TeachersRepositoryTest {
   void testTeachersPaging() {
     System.out.println(teachersRepository.getTeachersPaging(0, 2));
     assertThat(teachersRepository.getTeachersPaging(0, 2))
-            .containsExactlyInAnyOrder(
-                    new Teacher(1L, "Damian", "Lewandowski", Collections.emptySet()),
-                    new Teacher(3L, "Artur", "Wójcik", Collections.emptySet()));
+        .containsExactlyInAnyOrder(
+            new Teacher(1L, "Damian", "Lewandowski", Collections.emptySet()),
+            new Teacher(3L, "Artur", "Wójcik", Collections.emptySet()));
 
     assertThat(teachersRepository.getTeachersPaging(1, 2))
-            .containsExactlyInAnyOrder(new Teacher(2L, "Beata", "Woźniak", Collections.emptySet()));
+        .containsExactlyInAnyOrder(new Teacher(2L, "Beata", "Woźniak", Collections.emptySet()));
   }
 
   @Test
@@ -69,5 +69,11 @@ public class TeachersRepositoryTest {
     teacher.getSchoolClasses().clear();
     entityManager.remove(teacher);
     entityManager.getTransaction().commit();
+  }
+
+  @Test
+  @DisplayName("Should prevent removing teacher.")
+  void testGetTeacherInitials() {
+    assertThat(teachersRepository.getTeacherInitials()).isEqualTo("D.L.,B.W.,A.W.");
   }
 }

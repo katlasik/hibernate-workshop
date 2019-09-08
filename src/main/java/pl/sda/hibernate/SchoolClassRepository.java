@@ -17,9 +17,9 @@ public class SchoolClassRepository {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 
-   public List<VerbalTest> getAllVerbalTestsBySchoolClassId(long id) {
-     throw new UnsupportedOperationException("Not yet implemented");
-   }
+  public List<VerbalTest> getAllVerbalTestsBySchoolClassId(long id) {
+   throw new UnsupportedOperationException("Not yet implemented");
+  }
 
   public <T extends Test> List<T> getTestsByType(Class<T> type) {
     throw new UnsupportedOperationException("Not yet implemented");

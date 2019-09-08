@@ -2,6 +2,7 @@ package pl.sda.hibernate;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import pl.sda.hibernate.model.Teacher;
 
@@ -18,6 +19,10 @@ public class TeachersRepository {
   }
 
   public List<Teacher> getTeachersPaging(int page, int pageSize) {
+    throw new UnsupportedOperationException("Not yet implemented");
+  }
+
+  public String getTeacherInitials() {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 }

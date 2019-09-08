@@ -59,7 +59,6 @@ public class StudentNote {
     return student;
   }
 
-  @PrePersist
   void prePersist() {
     throw new UnsupportedOperationException("Not yet implemented");
   }
