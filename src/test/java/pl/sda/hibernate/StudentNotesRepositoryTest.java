@@ -70,4 +70,13 @@ public class StudentNotesRepositoryTest {
     entityManager.getTransaction().commit();
     assertThat(entityManager.find(StudentNote.class, sn.getId()).getCreatedAt()).isNotNull();
   }
+
+  @Test
+  @DisplayName("Student notes should be deleted with student.")
+  void deleteStudentsNotes() {
+    entityManager.getTransaction().begin();
+    entityManager.remove(entityManager.getReference(Student.class, 1L));
+    entityManager.getTransaction().commit();
+  }
+
 }

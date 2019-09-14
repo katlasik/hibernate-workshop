@@ -31,6 +31,8 @@
    2. Zaimplementuj metodę `getNotesByStudentId`.
    3. Zaimplementuj metodę `getNotesWithClassNameByStudentId`, tak by zwracała listę `NoteWithClassName`.
    4. Zaimplementuj metodę `prePersist` w `StudentNote`, tak by ustawiała pole `createdAt`.
+   5. Dodaj odpowiednią kaskadę do relacji ocen do uczniów, tak by przy usuwaniu rekordu ucznia były także
+      usuwane wszystkie oceny.
    
 4. Zaimplementuj metody w `TeachersRepository`. 
    1. W metodzie `getTeachersNameDetails` użyj `contat` z **JPQL**.

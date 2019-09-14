@@ -3,6 +3,7 @@ package pl.sda.hibernate.model;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 import javax.persistence.*;
 
@@ -25,6 +26,9 @@ public class Student {
       joinColumns = {@JoinColumn(name = "student_id")},
       inverseJoinColumns = {@JoinColumn(name = "schoolClass_id")})
   private List<SchoolClass> schoolClasses;
+
+  @OneToMany(mappedBy = "student")
+  private Set<StudentNote> notes;
 
   public Student() {}
 
@@ -71,8 +75,8 @@ public class Student {
     this.birthdate = birthdate;
   }
 
-  public void setSchoolClasses(List<SchoolClass> schoolClasses) {
-    this.schoolClasses = schoolClasses;
+  public Set<StudentNote> getNotes() {
+    return notes;
   }
 
   @Override
