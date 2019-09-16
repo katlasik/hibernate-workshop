@@ -14,17 +14,18 @@
 
 ![dane](assets/diagram.png)
 
-
 # Zadania
 
 1. Uzupełnij mapowanie encji. Wygeneruj schemat bazy danych za pomocą opcji **hibernate.hbm2ddl.auto**.
+
 2. Zaimplementuj metody w `StudentsRepository`:
    1. Zaimplementuj metodę `findStudentById` by ładowała encję studenta, używając `Optional`.
    2. Zaimplementuj metodę `findStudentByIdLazily`, tak by pobierała leniwie encję studenta.
    3. Zaimplementuj `createStudent`, `updateStudent`, `deleteStudent` i `refreshStudent` używając odpowiednich metod z frameworku **Hibernate**.
-   4. Używając *JPQL* zaimplementuj `getStudents`, `findStudentsByName`, `getStudentsCount` oraz `getClassesByStudentId`.
-   Parametr `name` w `findStudentsByName` może mieć dowolną wielkość znaków.  
-   5. Zaimplementuj `getAllFriendStudentsByStudentId` w ten sposób, żeby można było mieć dostęp do pola `schoolClasses` studenta nawet po zaknięciu sesji.
+   4. Używając *JPQL* zaimplementuj `getStudentByName`, tak by zwracał pusty `Optional` gdy uczeń nie zostanie znaleziony.
+   5. Używając *JPQL* zaimplementuj `getStudents`, `findStudentsByName`, `getStudentsCount` oraz `getClassesByStudentId`.
+      Parametr `name` w `findStudentsByName` może mieć dowolną wielkość znaków.  
+   6. Zaimplementuj `getAllFriendStudentsByStudentId` w ten sposób, żeby można było mieć dostęp do pola `schoolClasses` studenta nawet po zaknięciu sesji.
    
 3. Zaimplementu metody w `StudentNoteRepository`:
    1. Zaimplementuj metodę `getAverageBySchoolClass`.
@@ -32,11 +33,13 @@
    3. Zaimplementuj metodę `getNotesWithClassNameByStudentId`, tak by zwracała listę `NoteWithClassName`.
    4. Zaimplementuj metodę `prePersist` w `StudentNote`, tak by ustawiała pole `createdAt`.
    5. Dodaj odpowiednią kaskadę do relacji ocen do uczniów, tak by przy usuwaniu rekordu ucznia były także
-      usuwane wszystkie oceny.
-   
+         usuwane wszystkie oceny.
+          
 4. Zaimplementuj metody w `TeachersRepository`. 
-   1. W metodzie `getTeachersNameDetails` użyj `contat` z **JPQL**.
-   2. W metodzie `getTeachersPaging` zaimplementuj paginację.
+   1. Użyj klasy `FullName` jako rekordu *embedded* zamiast `firstName` i `lastName` w `Teacher`.
+      Zmodyfikuj odpowiednio *settery* i *gettery* dla `firstName` oraz `lastName`.
+   1. Zaimplementuj `getTeachersNameDetails` używając `concat` z **JPQL**.
+   2. W metodzie `getTeachersPaging` zaimplementuj stronnicowanie.
    3. Zaimplementuj metodę `assignToSchoolClass` w encji `Teacher` która pozwala na dodanie nauczyciela do przedmiotu.
    4. Zaimplementuj metodę `preRemove`, która sprawdza czy nauczyciel uczy jakiegokolwiek przedmiotu.
       Jeżeli tak, to zgłoś wyjątek `IllegalStateException`.
@@ -48,11 +51,10 @@
    1. Zaimplementuj metodę `getAllTestsBySchoolClassId`, która zwraca wszystkie testy dla danego przedmiotu.
    2. Zaimplementuj metodę `getAllVerbalTestsBySchoolClassId`, która zwraca wszystkie testy ustne dla danego przedmiotu.
    3. Zaimplementuj metodę `getTestsByType`, która zwraca wszystkie testy danego podtypu.
-   4. Zaimplementuj metodę `addTopic` w encji `SchoolClass`, która będzie pozwała dodać temat do przedmiotu.
-
-6. Użyj `FullName` jako obiekt *embedded* zamiast `firstName` i `lastName` w `Teacher` i `Student`. 
-
-7. Zmodyfikuj metody w `StudentRepository` i `TeacherRepository` tak by używały **NamedQueries**.
-
-7. Zmodyfikuj metody w `StudentRepository` i `TeacherRepository` tak by używały **Criteria API**.
-
+   4. Zaimplementuj metodę `findSchoolClassByName` w ten sposób, aby zapytanie `JPQL` było umieszone w klasie
+      encji `SchoolClass`.
+   5. Dodaj możliwość przechowywania listy tematów zajęć dla przedmiotu. W tym celu stwórz w klasie encji `SchoolClass` 
+      dodaje pole `lessonTopics` o type kolekcji zawierającej typ `String`. 
+      Zaimplementuj metody `addLessonTopic` oraz `getLessonTopics` w encji `SchoolClass`.
+   6. Zaimplementuj metodę `getTopics`, która pozwala zwrócić listę tematów dla podanych `id` przedmiotów.
+   7. Zaimplementuj metody `getStudentsBySchoolClassName` oraz `getStudentsNotesBySchoolClassId` używając **Criteria API**.

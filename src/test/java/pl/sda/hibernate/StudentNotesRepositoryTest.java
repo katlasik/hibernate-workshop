@@ -78,5 +78,4 @@ public class StudentNotesRepositoryTest {
     entityManager.remove(entityManager.getReference(Student.class, 1L));
     entityManager.getTransaction().commit();
   }
-
 }

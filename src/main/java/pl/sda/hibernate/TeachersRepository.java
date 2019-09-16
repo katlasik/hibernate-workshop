@@ -2,8 +2,6 @@ package pl.sda.hibernate;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import pl.sda.hibernate.model.Teacher;
 
 public class TeachersRepository {

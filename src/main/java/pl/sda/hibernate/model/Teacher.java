@@ -65,9 +65,9 @@ public class Teacher {
   @Override
   public String toString() {
     return new StringJoiner(", ", Teacher.class.getSimpleName() + "[", "]")
-        .add("id=" + id)
-        .add("firstName='" + firstName + "'")
-        .add("lastName='" + lastName + "'")
+        .add("id=" + getId())
+        .add("firstName='" + getFirstName() + "'")
+        .add("lastName='" + getLastName() + "'")
         .toString();
   }
 
@@ -76,13 +76,13 @@ public class Teacher {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Teacher student = (Teacher) o;
-    return Objects.equals(id, student.id)
-        && firstName.equals(student.firstName)
-        && lastName.equals(student.lastName);
+    return Objects.equals(id, student.getId())
+        && firstName.equals(student.getFirstName())
+        && lastName.equals(student.getLastName());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName);
+    return Objects.hash(getId(), getFirstName(), getLastName());
   }
 }

@@ -24,5 +24,4 @@ public class StudentNotesRepository {
   public List<NoteWithClassName> getNotesWithClassNameByStudentId(long id) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
-
 }
