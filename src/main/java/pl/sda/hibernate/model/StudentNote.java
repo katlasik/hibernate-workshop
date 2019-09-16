@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.StringJoiner;
 import javax.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.Immutable;
 
 public class StudentNote {
 

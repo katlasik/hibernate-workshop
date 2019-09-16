@@ -17,8 +17,6 @@ public class SchoolClass {
 
   private List<Test> tests;
 
-  private List<String> lessonTopics;
-
   public SchoolClass() {}
 
   public SchoolClass(Long id, String name) {
@@ -41,7 +39,7 @@ public class SchoolClass {
   }
 
   public void setTeacher(Teacher teacher) {
-     throw new UnsupportedOperationException("Not yet implemented");
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public List<Student> getStudents() {
@@ -53,7 +51,7 @@ public class SchoolClass {
   }
 
   public List<String> getLessonTopics() {
-    return lessonTopics;
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   public void addLessonTopic(String topic) {

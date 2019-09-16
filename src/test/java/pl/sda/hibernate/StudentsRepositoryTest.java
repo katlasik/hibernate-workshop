@@ -1,6 +1,8 @@
 package pl.sda.hibernate;
 
-
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -18,11 +20,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import pl.sda.hibernate.model.SchoolClass;
 import pl.sda.hibernate.model.Student;
 import pl.sda.hibernate.utils.HibernateBootstraper;
-import pl.sda.test.base.DatabaseSetup;
+import pl.sda.test.base.DatabaseSetupTest;
 
 public class StudentsRepositoryTest {
 
-  @RegisterExtension static DatabaseSetup db = new DatabaseSetup();
+  @RegisterExtension static DatabaseSetupTest db = new DatabaseSetupTest();
 
   private EntityManagerFactory factory = HibernateBootstraper.createEntityManagerFactory();
   private EntityManager entityManager = factory.createEntityManager();
@@ -193,6 +195,21 @@ public class StudentsRepositoryTest {
   }
 
   @Test
+  @DisplayName("All student entries should be returned")
+  void testFindStudentByLastName() {
+    Optional<Student> student = studentsRepository.getStudentByName("Rudnicki");
+    assertThat(student)
+        .contains(new Student(4L, "Błażej", "Rudnicki", LocalDate.parse("1998-12-03")));
+  }
+
+  @Test
+  @DisplayName("All student entries should be returned")
+  void testFindStudentByLastNameFailure() {
+    Optional<Student> student = studentsRepository.getStudentByName("Campanella");
+    assertThat(student).isEmpty();
+  }
+
+  @Test
   @DisplayName("All student classes should be fetched")
   void testGetClassesByStudentId() {
     List<SchoolClass> result = studentsRepository.getClassesByStudentId(1L);
@@ -208,12 +225,19 @@ public class StudentsRepositoryTest {
     List<Student> students = studentsRepository.getAllFriendStudentsByStudentId(3L);
     entityManager.close();
 
-    assertThat(students.size()).isEqualTo(2);
-    assertThat(students.get(0).getFirstName()).isEqualTo("Krystyna");
-    assertThat(students.get(0).getSchoolClasses())
-        .containsExactlyInAnyOrder(new SchoolClass(3L, "Chemia"));
-    assertThat(students.get(1).getFirstName()).isEqualTo("Błażej");
-    assertThat(students.get(1).getSchoolClasses())
-        .containsExactlyInAnyOrder(new SchoolClass(3L, "Chemia"));
+    assertThat(students.size()).isEqualTo(3);
+
+    Map<String, List<SchoolClass>> classes =
+        students.stream().collect(toMap(Student::getFirstName, Student::getSchoolClasses));
+
+    assertThat(classes.get("Błażej"))
+        .hasSameElementsAs(singletonList(new SchoolClass(3L, "Chemia")));
+
+    assertThat(classes.get("Szymon"))
+        .hasSameElementsAs(
+            asList(new SchoolClass(1L, "Matematyka"), new SchoolClass(2L, "Fizyka")));
+
+    assertThat(classes.get("Krystian"))
+        .hasSameElementsAs(singletonList(new SchoolClass(2L, "Fizyka")));
   }
 }

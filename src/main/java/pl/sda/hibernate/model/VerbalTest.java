@@ -3,8 +3,6 @@ package pl.sda.hibernate.model;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.StringJoiner;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
 
 public class VerbalTest extends Test {
 

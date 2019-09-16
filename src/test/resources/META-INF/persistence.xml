@@ -12,15 +12,15 @@
         <class>pl.sda.hibernate.model.WrittenTest</class>
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/school?serverTimezone=UTC" />
-            <property name="javax.persistence.jdbc.user" value="school_user" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/school_hib?serverTimezone=UTC" />
+            <property name="javax.persistence.jdbc.user" value="school_hib_user" />
             <property name="javax.persistence.jdbc.password" value="pass" />
             <property name="hibernate.jdbc.time_zone" value="UTC"/>
             <property name="hibernate.dialect" value=" org.hibernate.dialect.MySQL8Dialect"/>
-             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
         </properties>
     </persistence-unit>
 </persistence>

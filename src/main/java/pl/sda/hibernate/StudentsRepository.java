@@ -3,7 +3,6 @@ package pl.sda.hibernate;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import pl.sda.hibernate.model.SchoolClass;
 import pl.sda.hibernate.model.Student;
 
@@ -29,17 +28,14 @@ public class StudentsRepository {
 
   public void updateStudent(Student student) {
     throw new UnsupportedOperationException("Not yet implemented");
-
   }
 
   public void deleteStudent(Student student) {
     throw new UnsupportedOperationException("Not yet implemented");
-
   }
 
   public void refreshStudent(Student student) {
     throw new UnsupportedOperationException("Not yet implemented");
-
   }
 
   public List<Student> getStudents() {
@@ -47,6 +43,10 @@ public class StudentsRepository {
   }
 
   public long getStudentsCount() {
+    throw new UnsupportedOperationException("Not yet implemented");
+  }
+
+  public Optional<Student> getStudentByName(String name) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import pl.sda.utils.JDBCUrlBuilder;
 
-public class DatabaseSetup implements BeforeAllCallback, BeforeEachCallback {
+public class DatabaseSetupTest implements BeforeAllCallback, BeforeEachCallback {
 
   private DbSetupTracker dbSetupTracker = new DbSetupTracker();
   private Config config = ConfigFactory.load();
@@ -47,7 +47,7 @@ public class DatabaseSetup implements BeforeAllCallback, BeforeEachCallback {
   private DbSetup createDbSetup() {
     Operation operation =
         sequenceOf(
-            deleteAllFrom("SchoolClass_lessonTopics"),
+            deleteAllFrom("LessonTopics"),
             deleteAllFrom("StudentNote"),
             deleteAllFrom("Test"),
             deleteAllFrom("SchoolClassStudent"),
@@ -73,8 +73,8 @@ public class DatabaseSetup implements BeforeAllCallback, BeforeEachCallback {
                 .values(2L, 2L, "Fizyka")
                 .values(3L, 3L, "Chemia")
                 .build(),
-            insertInto("SchoolClass_lessonTopics")
-                .columns("SchoolClass_id", "lessonTopics")
+            insertInto("LessonTopics")
+                .columns("schoolClass_id", "topic")
                 .values(1L, "Ułamki")
                 .values(1L, "Funkcja kwadratowa")
                 .values(2L, "Optyka")

@@ -13,11 +13,11 @@ import pl.sda.hibernate.model.Student;
 import pl.sda.hibernate.model.StudentNote;
 import pl.sda.hibernate.model.dto.NoteWithClassName;
 import pl.sda.hibernate.utils.HibernateBootstraper;
-import pl.sda.test.base.DatabaseSetup;
+import pl.sda.test.base.DatabaseSetupTest;
 
 public class StudentNotesRepositoryTest {
 
-  @RegisterExtension static DatabaseSetup db = new DatabaseSetup();
+  @RegisterExtension static DatabaseSetupTest db = new DatabaseSetupTest();
 
   private EntityManagerFactory factory = HibernateBootstraper.createEntityManagerFactory();
   private EntityManager entityManager = factory.createEntityManager();
@@ -69,5 +69,13 @@ public class StudentNotesRepositoryTest {
     entityManager.persist(sn);
     entityManager.getTransaction().commit();
     assertThat(entityManager.find(StudentNote.class, sn.getId()).getCreatedAt()).isNotNull();
+  }
+
+  @Test
+  @DisplayName("Student notes should be deleted with student.")
+  void deleteStudentsNotes() {
+    entityManager.getTransaction().begin();
+    entityManager.remove(entityManager.getReference(Student.class, 1L));
+    entityManager.getTransaction().commit();
   }
 }
