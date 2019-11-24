@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/katlasik/hibernate-workshop.svg?style=svg)](https://circleci.com/gh/katlasik/hibernate-workshop)
+
 # Przygotowania
 
 1. Sklonuj ten projekt.

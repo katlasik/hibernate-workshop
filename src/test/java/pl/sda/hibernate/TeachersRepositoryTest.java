@@ -12,11 +12,11 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import pl.sda.hibernate.model.SchoolClass;
 import pl.sda.hibernate.model.Teacher;
 import pl.sda.hibernate.utils.HibernateBootstraper;
-import pl.sda.test.base.DatabaseSetup;
+import pl.sda.test.base.DatabaseSetupTest;
 
 public class TeachersRepositoryTest {
 
-  @RegisterExtension static DatabaseSetup db = new DatabaseSetup();
+  @RegisterExtension static DatabaseSetupTest db = new DatabaseSetupTest();
 
   private EntityManagerFactory factory = HibernateBootstraper.createEntityManagerFactory();
 

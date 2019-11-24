@@ -13,11 +13,11 @@ import pl.sda.hibernate.model.Student;
 import pl.sda.hibernate.model.StudentNote;
 import pl.sda.hibernate.model.dto.NoteWithClassName;
 import pl.sda.hibernate.utils.HibernateBootstraper;
-import pl.sda.test.base.DatabaseSetup;
+import pl.sda.test.base.DatabaseSetupTest;
 
 public class StudentNotesRepositoryTest {
 
-  @RegisterExtension static DatabaseSetup db = new DatabaseSetup();
+  @RegisterExtension static DatabaseSetupTest db = new DatabaseSetupTest();
 
   private EntityManagerFactory factory = HibernateBootstraper.createEntityManagerFactory();
   private EntityManager entityManager = factory.createEntityManager();

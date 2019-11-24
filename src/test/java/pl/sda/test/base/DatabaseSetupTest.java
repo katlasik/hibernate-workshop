@@ -19,7 +19,7 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import pl.sda.utils.JDBCUrlBuilder;
 
-public class DatabaseSetup implements BeforeAllCallback, BeforeEachCallback {
+public class DatabaseSetupTest implements BeforeAllCallback, BeforeEachCallback {
 
   private DbSetupTracker dbSetupTracker = new DbSetupTracker();
   private Config config = ConfigFactory.load();

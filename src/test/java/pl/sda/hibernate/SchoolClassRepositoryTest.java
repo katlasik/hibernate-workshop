@@ -11,11 +11,11 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
 import pl.sda.hibernate.model.*;
 import pl.sda.hibernate.utils.HibernateBootstraper;
-import pl.sda.test.base.DatabaseSetup;
+import pl.sda.test.base.DatabaseSetupTest;
 
 class SchoolClassRepositoryTest {
 
-  @RegisterExtension static DatabaseSetup db = new DatabaseSetup();
+  @RegisterExtension static DatabaseSetupTest db = new DatabaseSetupTest();
 
   private EntityManagerFactory factory = HibernateBootstraper.createEntityManagerFactory();
   private EntityManager entityManager = factory.createEntityManager();

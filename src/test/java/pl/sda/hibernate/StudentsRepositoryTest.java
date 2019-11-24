@@ -20,11 +20,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import pl.sda.hibernate.model.SchoolClass;
 import pl.sda.hibernate.model.Student;
 import pl.sda.hibernate.utils.HibernateBootstraper;
-import pl.sda.test.base.DatabaseSetup;
+import pl.sda.test.base.DatabaseSetupTest;
 
 public class StudentsRepositoryTest {
 
-  @RegisterExtension static DatabaseSetup db = new DatabaseSetup();
+  @RegisterExtension static DatabaseSetupTest db = new DatabaseSetupTest();
 
   private EntityManagerFactory factory = HibernateBootstraper.createEntityManagerFactory();
   private EntityManager entityManager = factory.createEntityManager();
