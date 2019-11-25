@@ -30,7 +30,7 @@ jobs:
             - ~/.m2
           key: java-workshop-{{ checksum "pom.xml" }}
       - run: |
-          if [ "$CIRCLE_BRANCH" -ne "solutions" ]; then
+          if [ "$CIRCLE_BRANCH" != "solutions" ]; then
               mvn test -Dtest=DatabaseSetupTest
           fi
       - run: |
