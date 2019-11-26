@@ -31,7 +31,7 @@ jobs:
           key: java-workshop-{{ checksum "pom.xml" }}
       - run: |
           if [ "$CIRCLE_BRANCH" != "solutions" ]; then
-              mvn test -Dtest=DatabaseSetupTest
+              mvn test -Dtest=HibernateBootstraperTest.java
           fi
       - run: |
           if [ "$CIRCLE_BRANCH" = "solutions" ]; then
