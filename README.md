@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/katlasik/hibernate-workshop.svg?style=svg)](https://circleci.com/gh/katlasik/hibernate-workshop)
-
 # Przygotowania
 
 1. Sklonuj ten projekt.
@@ -18,10 +16,12 @@
 
 # Zadania
 
-1. Uzupełnij mapowanie encji. Wygeneruj schemat bazy danych za pomocą opcji **hibernate.hbm2ddl.auto**.
+1. Uzupełnij mapowanie encji. Wygeneruj schemat bazy danych za pomocą opcji **hibernate.hbm2ddl.auto**. 
+   Następnie przestaw opcję **hibernate.hbm2ddl.auto** na tryb walidacji, usuń schemat bazy danych i wygeneruj schema bazy danych
+   za pomocą skryptu [hibernate.hbm2ddl.auto](src/main/resources/db/create_schema.sql).
 
 2. Zaimplementuj metody w `StudentsRepository`:
-   1. Zaimplementuj metodę `findStudentById` by ładowała encję studenta, używając `Optional`.
+   1. Zaimplementuj metodę `findStudentById`, tak by ładowała encję studenta, używając `Optional`.
    2. Zaimplementuj metodę `findStudentByIdLazily`, tak by pobierała leniwie encję studenta.
    3. Zaimplementuj `createStudent`, `updateStudent`, `deleteStudent` i `refreshStudent` używając odpowiednich metod z frameworku **Hibernate**.
    4. Używając *JPQL* zaimplementuj `getStudentByName`, tak by zwracał pusty `Optional` gdy uczeń nie zostanie znaleziony.
@@ -56,7 +56,7 @@
    4. Zaimplementuj metodę `findSchoolClassByName` w ten sposób, aby zapytanie `JPQL` było umieszone w klasie
       encji `SchoolClass`.
    5. Dodaj możliwość przechowywania listy tematów zajęć dla przedmiotu. W tym celu stwórz w klasie encji `SchoolClass` 
-      dodaje pole `lessonTopics` o type kolekcji zawierającej typ `String`. 
+      dodatkowe pole `lessonTopics` o type kolekcji zawierającej typ `String`. 
       Zaimplementuj metody `addLessonTopic` oraz `getLessonTopics` w encji `SchoolClass`.
    6. Zaimplementuj metodę `getTopics`, która pozwala zwrócić listę tematów dla podanych `id` przedmiotów.
    7. Zaimplementuj metody `getStudentsBySchoolClassName` oraz `getStudentsNotesBySchoolClassId` używając **Criteria API**.
