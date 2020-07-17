@@ -2,7 +2,6 @@ package pl.sda.hibernate.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.StringJoiner;
 import javax.persistence.*;
 
 public class StudentNote {
@@ -60,26 +59,19 @@ public class StudentNote {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    StudentNote that = (StudentNote) o;
-    return Objects.equals(id, that.id)
-        && Objects.equals(value, that.value)
-        && Objects.equals(weight, that.weight)
-        && Objects.equals(createdAt, that.createdAt);
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    StudentNote other = (StudentNote) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, value, weight, createdAt);
+    return 112;
   }
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", StudentNote.class.getSimpleName() + "[", "]")
-        .add("id=" + id)
-        .add("value=" + value)
-        .add("weight=" + weight)
-        .add("createdAt=" + createdAt)
-        .toString();
+    return StudentNote.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 }

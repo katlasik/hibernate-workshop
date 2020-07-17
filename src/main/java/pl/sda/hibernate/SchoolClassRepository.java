@@ -42,7 +42,7 @@ public class SchoolClassRepository {
   }
 
   public List<StudentNote> getStudentsNotesBySchoolClassId(
-          Long schoolClassId, LocalDate from, LocalDate to) {
+      Long schoolClassId, LocalDate from, LocalDate to) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 }

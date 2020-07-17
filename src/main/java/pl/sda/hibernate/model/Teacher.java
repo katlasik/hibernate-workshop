@@ -2,7 +2,6 @@ package pl.sda.hibernate.model;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 import javax.persistence.*;
 
 public class Teacher {
@@ -60,25 +59,20 @@ public class Teacher {
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", Teacher.class.getSimpleName() + "[", "]")
-        .add("id=" + getId())
-        .add("firstName='" + getFirstName() + "'")
-        .add("lastName='" + getLastName() + "'")
-        .toString();
+    return Teacher.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Teacher student = (Teacher) o;
-    return Objects.equals(id, student.getId())
-        && firstName.equals(student.getFirstName())
-        && lastName.equals(student.getLastName());
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    Teacher other = (Teacher) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getFirstName(), getLastName());
+    return 113;
   }
 }

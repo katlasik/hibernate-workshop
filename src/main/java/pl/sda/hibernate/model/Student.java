@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 import javax.persistence.*;
 
 public class Student {
@@ -72,27 +71,20 @@ public class Student {
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", Student.class.getSimpleName() + "[", "]")
-        .add("id=" + id)
-        .add("firstName='" + firstName + "'")
-        .add("lastName='" + lastName + "'")
-        .add("birthdate=" + birthdate)
-        .toString();
+    return Student.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Student student = (Student) o;
-    return Objects.equals(id, student.id)
-        && firstName.equals(student.firstName)
-        && lastName.equals(student.lastName)
-        && birthdate.equals(student.birthdate);
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    Student other = (Student) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, birthdate);
+    return 111;
   }
 }
