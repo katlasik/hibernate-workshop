@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
-public class Test {
+public abstract class Test {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

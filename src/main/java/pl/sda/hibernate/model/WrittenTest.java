@@ -2,7 +2,6 @@ package pl.sda.hibernate.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.StringJoiner;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -27,27 +26,20 @@ public class WrittenTest extends Test {
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", WrittenTest.class.getSimpleName() + "[", "]")
-        .add("id=" + id)
-        .add("subject='" + subject + "'")
-        .add("date=" + date)
-        .add("duration=" + duration)
-        .toString();
+    return WrittenTest.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    WrittenTest test = (WrittenTest) o;
-    return Objects.equals(id, test.id)
-        && Objects.equals(subject, test.subject)
-        && Objects.equals(date, test.date)
-        && Objects.equals(duration, test.duration);
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    WrittenTest other = (WrittenTest) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, subject, date, duration);
+    return 121;
   }
 }
