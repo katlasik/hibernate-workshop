@@ -2,11 +2,15 @@ package pl.sda.hibernate.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.StringJoiner;
 import javax.persistence.*;
+import org.hibernate.annotations.Immutable;
 
+@Entity
+@Immutable
 public class StudentNote {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
 
   private Integer value;
@@ -15,9 +19,9 @@ public class StudentNote {
 
   private LocalDate createdAt;
 
-  private SchoolClass schoolClass;
+  @ManyToOne private SchoolClass schoolClass;
 
-  private Student student;
+  @ManyToOne private Student student;
 
   public StudentNote(Integer value, Integer weight, SchoolClass schoolClass, Student student) {
     this.value = Objects.requireNonNull(value);
@@ -54,32 +58,25 @@ public class StudentNote {
 
   @PrePersist
   void prePersist() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    createdAt = LocalDate.now();
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    StudentNote that = (StudentNote) o;
-    return Objects.equals(id, that.id)
-        && Objects.equals(value, that.value)
-        && Objects.equals(weight, that.weight)
-        && Objects.equals(createdAt, that.createdAt);
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    StudentNote other = (StudentNote) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, value, weight, createdAt);
+    return 112;
   }
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", StudentNote.class.getSimpleName() + "[", "]")
-        .add("id=" + id)
-        .add("value=" + value)
-        .add("weight=" + weight)
-        .add("createdAt=" + createdAt)
-        .toString();
+    return StudentNote.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 }

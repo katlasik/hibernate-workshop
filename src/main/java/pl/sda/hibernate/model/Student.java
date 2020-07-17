@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 import javax.persistence.*;
 
+@Entity
 public class Student {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String firstName;
@@ -17,8 +19,14 @@ public class Student {
 
   private LocalDate birthdate;
 
+  @ManyToMany
+  @JoinTable(
+      name = "SchoolClassStudent",
+      joinColumns = {@JoinColumn(name = "student_id")},
+      inverseJoinColumns = {@JoinColumn(name = "schoolClass_id")})
   private List<SchoolClass> schoolClasses;
 
+  @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE)
   private Set<StudentNote> notes;
 
   public Student() {}
@@ -72,27 +80,20 @@ public class Student {
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", Student.class.getSimpleName() + "[", "]")
-        .add("id=" + id)
-        .add("firstName='" + firstName + "'")
-        .add("lastName='" + lastName + "'")
-        .add("birthdate=" + birthdate)
-        .toString();
+    return Student.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Student student = (Student) o;
-    return Objects.equals(id, student.id)
-        && firstName.equals(student.firstName)
-        && lastName.equals(student.lastName)
-        && birthdate.equals(student.birthdate);
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    Student other = (Student) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, birthdate);
+    return 111;
   }
 }

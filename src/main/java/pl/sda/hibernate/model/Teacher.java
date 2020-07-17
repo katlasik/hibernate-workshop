@@ -2,16 +2,19 @@ package pl.sda.hibernate.model;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 import javax.persistence.*;
+import pl.sda.hibernate.model.dto.FullName;
 
+@Entity
 public class Teacher {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String firstName;
-  private String lastName;
+  @Embedded private FullName fullName;
 
+  @OneToMany(mappedBy = "teacher")
   private Set<SchoolClass> schoolClasses;
 
   public Teacher() {}
@@ -22,8 +25,7 @@ public class Teacher {
     Objects.requireNonNull(lastName);
 
     this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.fullName = new FullName(firstName, lastName);
   }
 
   public Long getId() {
@@ -31,19 +33,19 @@ public class Teacher {
   }
 
   public String getFirstName() {
-    return firstName;
+    return fullName.getFirstName();
   }
 
   public void setFirstName(String firstName) {
-    this.firstName = firstName;
+    this.fullName.setFirstName(firstName);
   }
 
   public String getLastName() {
-    return lastName;
+    return fullName.getLastName();
   }
 
   public void setLastName(String lastName) {
-    this.lastName = lastName;
+    this.fullName.setLastName(lastName);
   }
 
   public Set<SchoolClass> getSchoolClasses() {
@@ -51,34 +53,33 @@ public class Teacher {
   }
 
   public void assignToSchoolClass(SchoolClass schoolClass) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    schoolClasses.add(schoolClass);
+    schoolClass.setTeacher(this);
   }
 
+  @PreRemove
   void preRemove() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    if (!schoolClasses.isEmpty()) {
+      throw new IllegalStateException("Teacher is teaching classes");
+    }
   }
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", Teacher.class.getSimpleName() + "[", "]")
-        .add("id=" + getId())
-        .add("firstName='" + getFirstName() + "'")
-        .add("lastName='" + getLastName() + "'")
-        .toString();
+    return Teacher.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Teacher student = (Teacher) o;
-    return Objects.equals(id, student.getId())
-        && firstName.equals(student.getFirstName())
-        && lastName.equals(student.getLastName());
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    Teacher other = (Teacher) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getFirstName(), getLastName());
+    return 113;
   }
 }

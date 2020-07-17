@@ -41,7 +41,7 @@
    1. Użyj klasy `FullName` jako rekordu *embedded* zamiast `firstName` i `lastName` w `Teacher`.
       Zmodyfikuj odpowiednio *settery* i *gettery* dla `firstName` oraz `lastName`.
    1. Zaimplementuj `getTeachersNameDetails` używając `concat` z **JPQL**.
-   2. W metodzie `getTeachersPaging` zaimplementuj stronnicowanie.
+   2. W metodzie `getTeachersPaging` zaimplementuj stronnicowanie sortując wyniki po `lastName` i `firstName`.
    3. Zaimplementuj metodę `assignToSchoolClass` w encji `Teacher` która pozwala na dodanie nauczyciela do przedmiotu.
    4. Zaimplementuj metodę `preRemove`, która sprawdza czy nauczyciel uczy jakiegokolwiek przedmiotu.
       Jeżeli tak, to zgłoś wyjątek `IllegalStateException`.

@@ -3,14 +3,19 @@ package pl.sda.hibernate.model;
 import java.time.LocalDate;
 import javax.persistence.*;
 
-public class Test {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
+public abstract class Test {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   protected Long id;
 
   protected String subject;
   protected LocalDate date;
 
-  protected SchoolClass schoolClass;
+  @ManyToOne protected SchoolClass schoolClass;
 
   public Long getId() {
     return id;

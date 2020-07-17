@@ -2,20 +2,30 @@ package pl.sda.hibernate.model;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import javax.persistence.*;
 
+@Entity
+@NamedQuery(name = "getSchoolClassByName", query = "from SchoolClass t where name = :name")
 public class SchoolClass {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String name;
 
-  private Teacher teacher;
+  @ManyToOne private Teacher teacher;
 
+  @ManyToMany(mappedBy = "schoolClasses")
   private List<Student> students;
 
+  @OneToMany(mappedBy = "schoolClass")
   private List<Test> tests;
+
+  @CollectionTable(name = "LessonTopics", joinColumns = @JoinColumn(name = "schoolClass_id"))
+  @Column(name = "topic")
+  @ElementCollection
+  private List<String> lessonTopics;
 
   public SchoolClass() {}
 
@@ -39,7 +49,8 @@ public class SchoolClass {
   }
 
   public void setTeacher(Teacher teacher) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    this.teacher = teacher;
+    teacher.getSchoolClasses().add(this);
   }
 
   public List<Student> getStudents() {
@@ -51,31 +62,29 @@ public class SchoolClass {
   }
 
   public List<String> getLessonTopics() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    return lessonTopics;
   }
 
   public void addLessonTopic(String topic) {
-    throw new UnsupportedOperationException("Not yet implemented");
+    this.lessonTopics.add(topic);
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    SchoolClass that = (SchoolClass) o;
-    return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    SchoolClass other = (SchoolClass) o;
+    return id != null && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return 110;
   }
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", SchoolClass.class.getSimpleName() + "[", "]")
-        .add("id=" + id)
-        .add("name='" + name + "'")
-        .toString();
+    return SchoolClass.class.getSimpleName() + "[" + "id=" + id + "]";
   }
 }
