@@ -26,33 +26,25 @@ public class StudentsRepository {
 
     public Student createStudent(Student student) {
         entityManager.getTransaction().begin();
-        System.out.println(student.getId());
         entityManager.persist(student);
-        System.out.println(student.getId());
         entityManager.getTransaction().commit();
         return student;
     }
 
     public void updateStudent(Student student) {
         entityManager.getTransaction().begin();
-        System.out.println(student.getId());
-        student.setId(1L);
-        student.setFirstName("Kunegunda");
         entityManager.merge(student);
-        System.out.println(student.getId());
         entityManager.getTransaction().commit();
     }
 
     public void deleteStudent(Student student) {
         entityManager.getTransaction().begin();
-        ;
         entityManager.remove(student);
         entityManager.getTransaction().commit();
     }
 
     public void refreshStudent(Student student) {
         entityManager.getTransaction().begin();
-        ;
         entityManager.refresh(student);
         entityManager.getTransaction().commit();
     }
