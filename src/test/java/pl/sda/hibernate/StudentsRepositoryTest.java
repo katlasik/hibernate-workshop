@@ -69,7 +69,7 @@ public class StudentsRepositoryTest {
 
   @Test
   @DisplayName("When property is lazy, should do database request only if necessary")
-  void testFindStudentByIdLazilyWithInorrectId()
+  void testFindStudentByIdLazilyWithIncorrectId()
       throws NoSuchFieldException, IllegalAccessException {
 
     Student reference = studentsRepository.findStudentByIdLazily(99L);
